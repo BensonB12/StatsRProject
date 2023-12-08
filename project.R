@@ -1,3 +1,5 @@
+library(ggplot2)
+
 setwd("C:/Users/verti/Downloads/r-final/StatsRProject")
 setwd("c:/StatsRStudio/StatsRProject")
 
@@ -10,12 +12,20 @@ setwd("c:/StatsRStudio/StatsRProject")
 # RestingBP: resting blood pressure [mm Hg]
 # MaxHR: maximum heart rate achieved [Numeric value between 60 and 202]
 
-library(ggplot2)
-
 heart <- read.csv(file="heart.csv", sep=",", header=T)
-df <- data.frame(heart$Sex, heart$ChestPainType, heart$Age, heart$RestingBP, heart$MaxHR)
+df <- data.frame(heart$Sex, heart$ChestPainType, heart$Age, heart$RestingBP, heart$MaxHR, heart$HeartDisease)
 
 head(df)
 
-ggplot(df, aes(x = heart.ChestPainType, y = heart.RestingBP)) +
-geom_bar(stat="identity")
+# Barplot
+ggplot(heart, aes(x = ChestPainType, y = RestingBP)) +
+  geom_bar(stat="identity", fill="steelblue")
+
+# Scatterplot with fit line
+plot(heart$Age, heart$RestingBP)
+abline(lm(heart$RestingBP ~ heart$Age, data = heart), col = "blue")
+
+#Sbs Box + Whisker Plot
+boxplot(heart$MaxHR ~ heart$Sex)
+
+t.test(heart$MaxHR ~ heart$Sex)
