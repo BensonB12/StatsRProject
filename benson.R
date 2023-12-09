@@ -54,5 +54,7 @@ condition <- rep(c("has Heart Disease", "Does not have HeartDisease"), 459)
 ggplot(df, aes(fill=condition, y=heart$Age, x=heart$ChestPainType)) +
   geom_bar(position="dodge", stat="identity")
 
+# stacked bar
 ggplot(df, aes(fill=condition, y=heart$Age, x=heart$ChestPainType)) +
   geom_bar(position="stack", stat="identity")
+
