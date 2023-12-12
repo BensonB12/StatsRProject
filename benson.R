@@ -16,7 +16,12 @@ library(ggplot2)
 # RestingBP: resting blood pressure [mm Hg]
 # MaxHR: maximum heart rate achieved [Numeric value between 60 and 202]
 
+sum(heart$HeartDisease)/length(heart$HeartDisease)
+
 heart <- read.csv(file="heart.csv", sep=",", header=T)
+
+PeopleWithoutandWith <- c(length(heart$HeartDisease) - sum(heart$HeartDisease), sum(heart$HeartDisease))
+chisq.test(PeopleWithoutandWith, p = c(1/2, 1/2))
 
 # Barplot
 ggplot(heart, aes(x = ChestPainType, y = RestingBP)) +
